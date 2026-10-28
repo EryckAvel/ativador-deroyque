@@ -1,10 +1,16 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
 spring:
   application:
-    name: ativador
+    name: activator
   datasource:
-    url: ${POSTGRES_URL}
+    url: ${POSTGRES_URL_DEV}
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
+
   jpa:
     hibernate:
       ddl-auto: none
