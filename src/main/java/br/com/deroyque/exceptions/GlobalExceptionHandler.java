@@ -1,5 +1,6 @@
 package br.com.deroyque.exceptions;
 
+import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
@@ -34,11 +35,11 @@ public class GlobalExceptionHandler {
         );
     }
 
-    @ExceptionHandler(EntityNotFoundException.class)
+    @ExceptionHandler(EntityExistsException.class)
     public ResponseEntity<ErrorResponse> handleBadRequestException(Exception ex, HttpServletRequest request) {
         return build(
                 HttpStatus.BAD_REQUEST,
-                "Dados Invalidos",
+                "Dados Inválidos",
                 ex.getMessage(),
                 request,
                 null
