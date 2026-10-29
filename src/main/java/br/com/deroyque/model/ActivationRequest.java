@@ -50,6 +50,14 @@ public class ActivationRequest {
         this.updatedAt = updatedAt;
     }
 
+    public ActivationRequest(String externalId, String customerId, String productCode, Instant createdAt, Instant updatedAt) {
+        this.externalId = externalId;
+        this.customerId = customerId;
+        this.productCode = productCode;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
     public UUID getId() {
         return id;
     }

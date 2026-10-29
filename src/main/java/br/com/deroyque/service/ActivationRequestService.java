@@ -6,6 +6,7 @@ import br.com.deroyque.mapper.ActivationRequestMapper;
 import br.com.deroyque.model.ActivationRequest;
 import br.com.deroyque.model.enums.StatusActivtionEnum;
 import br.com.deroyque.repository.ActivationRequestRepository;
+import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +29,9 @@ public class ActivationRequestService {
 
     @Transactional
     public ActivationRequestResponse registerActivation(ActivationRequestRequest activationRequestRequest) {
+        activationRequestRepository.findByExternalId(activationRequestRequest.externalId()).ifPresent(activationRequest -> {
+            throw new EntityExistsException("Activation request already exists");
+        });
         ActivationRequest activation = activationRequestMapper.toEntity(activationRequestRequest);
         activation.setStatus(StatusActivtionEnum.PENDING);
         activation = activationRequestRepository.saveAndFlush(activation);

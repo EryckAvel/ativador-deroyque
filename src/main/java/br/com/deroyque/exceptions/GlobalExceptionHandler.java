@@ -35,6 +35,17 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleBadRequestException(Exception ex, HttpServletRequest request) {
+        return build(
+                HttpStatus.BAD_REQUEST,
+                "Dados Invalidos",
+                ex.getMessage(),
+                request,
+                null
+        );
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleEntityNotFoundException(Exception ex, HttpServletRequest request) {
         return build(
                 HttpStatus.NOT_FOUND,
