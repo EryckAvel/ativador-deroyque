@@ -2,7 +2,12 @@ package br.com.deroyque.model;
 
 import br.com.deroyque.model.enums.StatusActivtionEnum;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.cglib.core.Local;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.UUID;
@@ -24,16 +29,18 @@ public class ActivationRequest {
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private StatusActivtionEnum status;
+    @CreationTimestamp
     @Column(name = "created_at")
-    private OffsetDateTime createdAt;
+    private Instant createdAt;
+    @UpdateTimestamp
     @Column(name = "updated_at")
-    private OffsetDateTime updatedAt;
+    private Instant updatedAt;
 
     public ActivationRequest() {
     }
 
     public ActivationRequest(UUID id, String externalId, String customerId, String productCode, StatusActivtionEnum status,
-                              OffsetDateTime createdAt, OffsetDateTime updatedAt) {
+                             Instant createdAt, Instant updatedAt) {
         this.id = id;
         this.externalId = externalId;
         this.customerId = customerId;
@@ -83,19 +90,19 @@ public class ActivationRequest {
         this.status = status;
     }
 
-    public OffsetDateTime getCreatedAt() {
+    public Instant getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(OffsetDateTime createdAt) {
+    public void setCreatedAt(Instant createdAt) {
         this.createdAt = createdAt;
     }
 
-    public OffsetDateTime getUpdatedAt() {
+    public Instant getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(OffsetDateTime updatedAt) {
+    public void setUpdatedAt(Instant updatedAt) {
         this.updatedAt = updatedAt;
     }
 
